@@ -76,27 +76,27 @@ class ProductoServiceTest {
         when(productoRepository.findById(5L)).thenReturn(Optional.of(p));
 
         // --- 2. EJECUCIÓN ---
-        ProductoResponseDTO resultado = productoService.buscarPorId(5L);
+        Optional<ProductoResponseDTO> resultado = productoService.buscarPorId(5L);
 
         // --- 3. VERIFICACIÓN ---
-        assertNotNull(resultado, "El producto no debe ser nulo");
-        assertEquals(5L, resultado.getId_producto(), "El ID debe ser 5");
-        assertEquals("Polera Grafica", resultado.getNombreProducto());
+        assertNotNull(resultado, "El Optional no debe ser nulo");
+        assertEquals(true, resultado.isPresent(), "El producto debe estar presente");
+        assertEquals(5L, resultado.get().getId_producto(), "El ID debe ser 5");
+        assertEquals("Polera Grafica", resultado.get().getNombreProducto());
         verify(productoRepository, times(1)).findById(5L);
     }
 
     @Test
-    @DisplayName("Debe lanzar excepción al buscar un producto que no existe")
+    @DisplayName("Debe retornar vacio al buscar un producto que no existe")
     void buscarProductoPorId_NoEncontrado() {
         // --- 1. PREPARACIÓN ---
         when(productoRepository.findById(99L)).thenReturn(Optional.empty());
 
-        // --- 2 & 3. EJECUCIÓN Y VERIFICACIÓN ---
-        RecursoNoEncontradoException excepcion = assertThrows(RecursoNoEncontradoException.class, () -> {
-            productoService.buscarPorId(99L);
-        });
+        // --- 2. EJECUCIÓN ---
+        Optional<ProductoResponseDTO> resultado = productoService.buscarPorId(99L);
 
-        assertEquals("Producto no encontrado", excepcion.getMessage(), "El mensaje de error debe coincidir");
+        // --- 3. VERIFICACIÓN ---
+        assertEquals(false, resultado.isPresent(), "El producto no debe estar presente");
         verify(productoRepository, times(1)).findById(99L);
     }
 }
