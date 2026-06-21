@@ -69,8 +69,6 @@ spring:
           predicates:
           - Path=/api/v1/devoluciones/v3/api-docs
 
-        # ------------------- NUEVOS MICROSERVICIOS -------------------
-
         # Ruta para catalogo (Productos)
         - id: service-catalogo
           uri: http://localhost:8081

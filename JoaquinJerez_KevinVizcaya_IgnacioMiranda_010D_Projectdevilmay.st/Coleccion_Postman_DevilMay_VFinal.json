@@ -1,0 +1,303 @@
+{
+  "info": {
+    "name": "DevilMay.st - Colección DEFINITIVA",
+    "description": "Colección completa con todos los endpoints (GET, POST, PUT, DELETE) de los 10 microservicios del proyecto DevilMay.stV5",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Catálogo (8081)",
+      "item": [
+        {
+          "name": "Listar Productos",
+          "request": { "method": "GET", "url": "http://localhost:8081/api/v1/productos" }
+        },
+        {
+          "name": "Buscar Producto por ID",
+          "request": { "method": "GET", "url": "http://localhost:8081/api/v1/productos/1" }
+        },
+        {
+          "name": "Crear Producto",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8081/api/v1/productos",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreProducto\": \"Polera Exclusiva\",\n  \"descripcionProducto\": \"Polera de algodon\",\n  \"precioProducto\": 15000,\n  \"tallaProducto\": \"M\",\n  \"estadoInventario\": \"DISPONIBLE\",\n  \"urlImagen\": \"http://imagen.com/polera.jpg\",\n  \"genero\": \"UNISEX\",\n  \"tipoPrenda\": \"SUPERIOR\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar Producto",
+          "request": { "method": "DELETE", "url": "http://localhost:8081/api/v1/productos/1" }
+        }
+      ]
+    },
+    {
+      "name": "2. Inventario (8082)",
+      "item": [
+        {
+          "name": "Listar Stock",
+          "request": { "method": "GET", "url": "http://localhost:8082/api/v1/inventario" }
+        },
+        {
+          "name": "Agregar Stock",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8082/api/v1/inventario",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": 1,\n  \"cantidadDisponible\": 100,\n  \"bodegaUbicacion\": \"Bodega Central\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Reservar Prenda",
+          "request": { "method": "PUT", "url": "http://localhost:8082/api/v1/inventario/1/reservar" }
+        }
+      ]
+    },
+    {
+      "name": "3. Carrito (8083)",
+      "item": [
+        {
+          "name": "Listar Carritos",
+          "request": { "method": "GET", "url": "http://localhost:8083/api/v1/carritos" }
+        },
+        {
+          "name": "Crear Carrito",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8083/api/v1/carritos",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Buscar Carrito por ID",
+          "request": { "method": "GET", "url": "http://localhost:8083/api/v1/carritos/1" }
+        },
+        {
+          "name": "Ver Total a Pagar",
+          "request": { "method": "GET", "url": "http://localhost:8083/api/v1/carritos/total" }
+        },
+        {
+          "name": "Eliminar Carrito",
+          "request": { "method": "DELETE", "url": "http://localhost:8083/api/v1/carritos/1" }
+        }
+      ]
+    },
+    {
+      "name": "4. Reservas (8084)",
+      "item": [
+        {
+          "name": "Listar Ordenes",
+          "request": { "method": "GET", "url": "http://localhost:8084/api/v1/ordenes" }
+        },
+        {
+          "name": "Crear Orden (Checkout)",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8084/api/v1/ordenes",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCarrito\": 1,\n  \"nombreCliente\": \"Juan Perez\",\n  \"rutCliente\": \"12345678-9\",\n  \"correoRespaldo\": \"juan@mail.com\",\n  \"idMetodoPago\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Buscar Orden por Nro",
+          "request": { "method": "GET", "url": "http://localhost:8084/api/v1/ordenes/1" }
+        }
+      ]
+    },
+    {
+      "name": "5. Logística (8085)",
+      "item": [
+        {
+          "name": "Listar Despachos",
+          "request": { "method": "GET", "url": "http://localhost:8085/api/v1/despachos" }
+        },
+        {
+          "name": "Crear Despacho",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8085/api/v1/despachos",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nroOrden\": 1,\n  \"direccionEnvio\": \"Av Siempre Viva 123\",\n  \"comuna\": \"Santiago Centro\",\n  \"idMetodoEntrega\": 1\n}"
+            }
+          }
+        },
+        {
+          "name": "Actualizar Estado Despacho",
+          "request": {
+            "method": "PUT",
+            "url": "http://localhost:8085/api/v1/despachos/1/estado",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idEstadoDespacho\": 3\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Promociones (8086)",
+      "item": [
+        {
+          "name": "Listar Cupones",
+          "request": { "method": "GET", "url": "http://localhost:8086/api/v1/cupones" }
+        },
+        {
+          "name": "Crear Cupon",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8086/api/v1/cupones",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"DESCUENTO20\",\n  \"porcentajeDescuento\": 20.0,\n  \"fechaExpiracion\": \"2026-12-31\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Buscar Cupon por Codigo",
+          "request": { "method": "GET", "url": "http://localhost:8086/api/v1/cupones/DESCUENTO20" }
+        },
+        {
+          "name": "Validar Vigencia del Cupon",
+          "request": { "method": "GET", "url": "http://localhost:8086/api/v1/cupones/DESCUENTO20/validar" }
+        },
+        {
+          "name": "Eliminar Cupon",
+          "request": { "method": "DELETE", "url": "http://localhost:8086/api/v1/cupones/DESCUENTO20" }
+        }
+      ]
+    },
+    {
+      "name": "7. Reembolsos (8087)",
+      "item": [
+        {
+          "name": "Listar Reembolsos",
+          "request": { "method": "GET", "url": "http://localhost:8087/api/v1/reembolsos" }
+        },
+        {
+          "name": "Crear Reembolso",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8087/api/v1/reembolsos",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idDevolucion\": 1,\n  \"montoDevuelto\": 15000.00,\n  \"bancoDestino\": \"Banco Estado\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Buscar Reembolso por Devolucion",
+          "request": { "method": "GET", "url": "http://localhost:8087/api/v1/reembolsos/1" }
+        },
+        {
+          "name": "Eliminar Reembolso",
+          "request": { "method": "DELETE", "url": "http://localhost:8087/api/v1/reembolsos/1" }
+        }
+      ]
+    },
+    {
+      "name": "8. Comprobantes (8088)",
+      "item": [
+        {
+          "name": "Listar Comprobantes",
+          "request": { "method": "GET", "url": "http://localhost:8088/api/v1/comprobantes" }
+        },
+        {
+          "name": "Crear Comprobante (Boleta)",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8088/api/v1/comprobantes",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nroOrden\": 1,\n  \"codigoCupon\": \"\",\n  \"fechaPago\": \"2026-06-21T10:00:00\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Buscar por Boleta",
+          "request": { "method": "GET", "url": "http://localhost:8088/api/v1/comprobantes/1" }
+        }
+      ]
+    },
+    {
+      "name": "9. Calificaciones (8089)",
+      "item": [
+        {
+          "name": "Listar Calificaciones",
+          "request": { "method": "GET", "url": "http://localhost:8089/api/v1/calificaciones" }
+        },
+        {
+          "name": "Crear Calificacion",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8089/api/v1/calificaciones",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProducto\": 1,\n  \"calificacion\": 5,\n  \"comentarioCliente\": \"Me encanto la calidad\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Ver Calificaciones de un Producto",
+          "request": { "method": "GET", "url": "http://localhost:8089/api/v1/calificaciones/producto/1" }
+        }
+      ]
+    },
+    {
+      "name": "10. Devoluciones (8090)",
+      "item": [
+        {
+          "name": "Listar Devoluciones",
+          "request": { "method": "GET", "url": "http://localhost:8090/api/v1/devoluciones" }
+        },
+        {
+          "name": "Crear Solicitud Devolucion",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8090/api/v1/devoluciones",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nroOrden\": 1,\n  \"motivo\": \"Talla equivocada\",\n  \"datosReembolso\": \"Cuenta Rut 123456\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Buscar Devolucion por ID",
+          "request": { "method": "GET", "url": "http://localhost:8090/api/v1/devoluciones/1" }
+        },
+        {
+          "name": "Cambiar Estado Devolucion",
+          "request": {
+            "method": "PUT",
+            "url": "http://localhost:8090/api/v1/devoluciones/1/estado",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"APROBADA\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
