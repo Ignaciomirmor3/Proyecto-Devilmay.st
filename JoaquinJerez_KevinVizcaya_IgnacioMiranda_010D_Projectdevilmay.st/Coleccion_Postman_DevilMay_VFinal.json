@@ -297,6 +297,34 @@
             }
           }
         }
+    },
+    {
+      "name": "11. Autenticacion (8091)",
+      "item": [
+        {
+          "name": "Registrar Usuario",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8091/auth/registrar",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreUsuario\": \"admin\",\n  \"password\": \"12345\",\n  \"rol\": \"ADMIN\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login Usuario",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8091/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreUsuario\": \"admin\",\n  \"password\": \"12345\"\n}"
+            }
+          }
+        }
       ]
     }
   ]

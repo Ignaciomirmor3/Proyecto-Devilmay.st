@@ -1,0 +1,76 @@
+server:
+  port: 8080
+
+jwt:
+  secret: "493358340235739058340598340598340598340598340642"
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:8080"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"    
+      routes:
+      # Ruta para logistica
+      - id: service-logistica
+        uri: http://localhost:8085
+        predicates:
+        - Path=/api/v3/logistica/**
+      # Ruta para reservas
+      - id: service-reservas
+        uri: http://localhost:8084
+        predicates:
+        - Path=/api/v2/reservas/**
+      # ruta para el inventario
+      - id: service-inventario
+        uri: http://localhost:8082
+        predicates:
+        - Path=/api/v1/stock/**
+      # ruta para catalogo
+      - id: service-catalogo
+        uri: http://localhost:8081
+        predicates:
+        - Path=/api/v1/genero/**, /api/v1/productos/**, /api/v1/tipos-prenda/**
+      # ruta para carrito
+      - id: service-carrito
+        uri: http://localhost:8083
+        predicates:
+        - Path=/api/v1/carritos/**
+      # ruta para calificaciones
+      - id: service-calificaciones
+        uri: http://localhost:8087
+        predicates:
+        - Path=/api/v1/calificaciones/**
+      # doc. calificaciones
+      - id: calificaciones-docs
+        uri: http://localhost:8087
+        predicates:
+        - Path=/api/v1/calificaciones/v3/api-docs
+      # ruta auth
+      - id: auth-service
+        uri: http://localhost:8090
+        predicates:
+        - Path=/auth/**
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+springdoc: # ingresar api docs de respectivos microservicios aquí, y en las rutas de arriba
+  swagger-ui:
+    urls: 
+      - name: Servicio Calificaciones
+        url: /api/v1/calificaciones/v3/api-docs
+
+      

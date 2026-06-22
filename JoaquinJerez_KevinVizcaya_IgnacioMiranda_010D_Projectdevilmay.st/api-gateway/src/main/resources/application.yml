@@ -124,6 +124,28 @@ spring:
           predicates:
           - Path=/api/v1/reembolsos/v3/api-docs
 
+        # Ruta para auth
+        - id: service-auth
+          uri: http://localhost:8091
+          predicates:
+          - Path=/auth, /auth/**
+
+        - id: auth-docs
+          uri: http://localhost:8091
+          predicates:
+          - Path=/auth/v3/api-docs
+
+        # Ruta para calificaciones
+        - id: service-calificaciones
+          uri: http://localhost:8089
+          predicates:
+          - Path=/api/v1/calificaciones, /api/v1/calificaciones/**
+
+        - id: calificaciones-docs
+          uri: http://localhost:8089
+          predicates:
+          - Path=/api/v1/calificaciones/v3/api-docs
+
 eureka:
   client:
     register-with-eureka: false
@@ -150,3 +172,7 @@ springdoc:
         url: /api/v1/cupones/v3/api-docs
       - name: Servicio Reembolsos
         url: /api/v1/reembolsos/v3/api-docs
+      - name: Servicio Autenticacion
+        url: /auth/v3/api-docs
+      - name: Servicio Calificaciones
+        url: /api/v1/calificaciones/v3/api-docs
