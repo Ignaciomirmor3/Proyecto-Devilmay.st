@@ -98,7 +98,7 @@ public class OrdenService {
                 .build()
                 .get()
                 // URI DE PROMOCIONES
-                .uri("http://localhost:8086/api/v1/promociones/" + codigoCupon)
+                .uri("http://localhost:8086/api/v1/cupones/" + codigoCupon)
                 .retrieve()
                 .bodyToMono(CuponDTO.class) 
                 .block();
