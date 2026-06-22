@@ -19,12 +19,13 @@ INSERT INTO producto (id_producto, nombre_producto, descripcion_producto, precio
 -- ==========================================
 USE db_inventario;
 
+-- Nota: id_producto debe coincidir con los insertados en db_catalogo
 INSERT INTO stock (id_stock, id_producto, estado_inventario) VALUES
 (1, 1, 'DISPONIBLE'),
 (2, 2, 'RESERVADO'),
-(3, 3, 'DISPONIBLE'),
+(3, 3, 'EN_TRANSITO'),
 (4, 4, 'VENDIDO'),
-(5, 5, 'DISPONIBLE');
+(5, 5, 'DEVUELTO');
 
 
 -- ==========================================
@@ -33,9 +34,9 @@ INSERT INTO stock (id_stock, id_producto, estado_inventario) VALUES
 USE db_promociones;
 
 INSERT INTO cupon (codigo_cupon, porcentaje_descuento, fecha_expiracion, activo) VALUES
-('DEVILMAY20', 20.0, '2026-12-31', 1),
-('VERANO10', 10.0, '2026-03-01', 1),
-('BLACKFRIDAY50', 50.0, '2025-11-30', 0);
+('VERANO2026', 20.0, '2026-12-31', 1),
+('DESCUENTO10', 10.0, '2026-12-31', 1),
+('PRIMERACOMPRA', 15.0, '2026-12-31', 1);
 
 
 -- ==========================================
