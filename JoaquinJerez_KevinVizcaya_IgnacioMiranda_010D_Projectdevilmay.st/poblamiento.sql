@@ -70,3 +70,57 @@ INSERT INTO metodo_pago (id_metodo_pago, descripcion) VALUES
 (1, 'Transferencia Bancaria'),
 (2, 'Webpay Plus / Tarjeta'),
 (3, 'MercadoPago');
+
+
+-- ==========================================
+-- BASE DE DATOS: db_seguridad (Auth)
+-- ==========================================
+USE db_seguridad;
+
+-- Claves encriptadas BCrypt u otro dependiendo de su implementación, aquí ejemplo genérico
+INSERT INTO usuario (id_usuario, nombre_usuario, password, rol) VALUES
+(1, 'admin_joaquin', '12345', 'ADMIN'),
+(2, 'admin_kevin', '12345', 'ADMIN'),
+(3, 'admin_ignacio', '12345', 'ADMIN'),
+(4, 'cliente1', 'password123', 'CLIENTE');
+
+
+-- ==========================================
+-- BASE DE DATOS: db_calificaciones
+-- ==========================================
+USE db_calificaciones;
+
+INSERT INTO resena (id_resena, id_producto, calificacion, comentario_cliente, fecha_creacion) VALUES
+(1, 1, 5, 'Excelente polera, muy buena calidad de la tela.', '2026-06-20'),
+(2, 2, 4, 'Me quedó un poco grande pero el cuero es increíble.', '2026-06-19'),
+(3, 4, 5, 'Zapatillas super cómodas, las recomiendo 100%.', '2026-06-21');
+
+
+-- ==========================================
+-- BASE DE DATOS: db_devoluciones
+-- ==========================================
+USE db_devoluciones;
+
+INSERT INTO devolucion (id_devolucion, nro_orden, motivo, datos_reembolso, estado) VALUES
+(1, 101, 'Me equivoqué de talla, pedí M y necesitaba L.', 'Cuenta Rut: 12345678-9', 'PENDIENTE'),
+(2, 102, 'La prenda venía con un pequeño piquete.', 'Cuenta Corriente Banco Estado', 'APROBADA');
+
+
+-- ==========================================
+-- BASE DE DATOS: db_reembolsos
+-- ==========================================
+USE db_reembolsos;
+
+INSERT INTO reembolso (id_reembolso, id_devolucion, monto_devuelto, banco_destino) VALUES
+(1, 2, 15000.00, 'Banco Estado');
+
+
+-- ==========================================
+-- BASE DE DATOS: db_comprobantes
+-- ==========================================
+USE db_comprobantes;
+
+INSERT INTO comprobante (id_comprobante, nro_orden, codigo_cupon, fecha_pago, total_pagado) VALUES
+(1, 105, 'DEVILMAY20', '2026-06-21 10:30:00', 12000.00);
+
+-- Fin del script
